@@ -34,7 +34,7 @@
     <div class="form__group">
         <button class="form__button" type="submit">ログインする</button>
         <p class="form__link">
-            <a href="/register">会員登録はこちら</a>
+            <a href="{{ route('register') }}">会員登録はこちら</a>
         </p>
     </div>
 </form>

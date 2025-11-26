@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CustomRegisterController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,12 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth')->group(function()
-{
-    
-});
 
 Route::get('/attendance', function () {
     return view('attendance');
-})->middleware('auth');
+})->name('attendance');
+
+Route::post('/login', [AuthController::class, 'store'])->name('login');
+
+Route::post('/register', [CustomRegisterController::class, 'store'])->name('register');
+
 

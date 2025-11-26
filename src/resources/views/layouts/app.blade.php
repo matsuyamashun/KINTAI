@@ -15,7 +15,7 @@
     <header class="header">
         <div class="header__inner">
             <div class="header-utilities">
-                <a class="header__logo" href="/register">
+                <a class="header__logo" href="{{ route('register') }}">
                     <img src="{{ asset('images/COACHTECHヘッダーロゴ.png')}}" alt="logo">
                 </a>
             </div>
