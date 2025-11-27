@@ -13,10 +13,10 @@
 
     <div class="form__group">
         <label>名前</label>
-            <input class="form__name" type="text" name="name" value="{{ old('name') }}">
-            @error('name')
-                <div class="form__error">{{ $message }}</div>
-            @enderror
+        <input class="form__name" type="text" name="name" value="{{ old('name') }}">
+        @error('name')
+            <div class="form__error">{{ $message }}</div>
+        @enderror
     </div>
 
     <div class="form__group">
