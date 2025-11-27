@@ -21,23 +21,23 @@
 
     <div class="form__group">
         <label>メールアドレス</label>
-            <input class="form__email" type="email" name="email" value="{{ old('email') }}">
-            @error('email')
-                <div class="form__error">{{ $message }}</div>
-            @enderror
+        <input class="form__email" type="email" name="email" value="{{ old('email') }}">
+        @error('email')
+            <div class="form__error">{{ $message }}</div>
+        @enderror
     </div>
 
     <div class="form__group">
         <label>パスワード</label>
-            <input class="form__password" type="password" name="password">
-            @error('password')
-                <div class="form__error">{{ $message }}</div>
-            @enderror
+        <input class="form__password" type="password" name="password">
+        @error('password')
+            <div class="form__error">{{ $message }}</div>
+        @enderror
     </div>
 
     <div class="form__group">
         <label>パスワード確認</label>
-            <input class="form__password" type="password" name="password_confirmation">
+        <input class="form__password" type="password" name="password_confirmation">
     </div>
 
     <div class="form__group">

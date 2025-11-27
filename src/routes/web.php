@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CustomRegisterController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CustomRegisterController;
+use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,8 +21,11 @@ Route::get('/attendance', function () {
     return view('attendance');
 })->name('attendance');
 
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
 Route::post('/login', [AuthController::class, 'store'])->name('login');
 
 Route::post('/register', [CustomRegisterController::class, 'store'])->name('register');
+
 
 

@@ -18,6 +18,6 @@ class CustomRegisterController extends Controller
             'password' => Hash::make($validated['password']),
         ]);
 
-        return redirect('/attendance');
+        return redirect()=>route('attendance');
     }
 }

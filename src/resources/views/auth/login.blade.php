@@ -13,18 +13,20 @@
 
     <div class="form__group">
         <label>メールアドレス</label>
-            <input class="form__email" type="email" name="email">
-            @error('email')
-                <div class="form__error">{{ $message }}</div>
-            @enderror
+        <input class="form__email" type="email" name="email">
+
+        @error('email')
+            <div class="form__error">{{ $message }}</div>
+        @enderror
     </div>
 
     <div class="form__group">
         <label>パスワード</label>
-            <input class="form__password" type="password" name="password">
-            @error('password')
-                <div class="form__error">{{ $message }}</div>
-            @enderror
+        <input class="form__password" type="password" name="password">
+
+        @error('password')
+            <div class="form__error">{{ $message }}</div>
+        @enderror
     </div>
 
     @if(session('error'))
