@@ -4,36 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Attendance;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
-
 
 class AttendanceController extends Controller
 {
     public function index()
     {
-        $attendance =
-        Attendance::where('user_id',auth()->id())
-            ->whereDate('date',today())
-            ->first();
+        $attendance = Attendance::getTodayAttendance(auth()->id());
 
-        $todayBreak = null;
+        $todayBreak = $attendance?->getCurrentBreak();
 
-        if($attendance) {
-            $todayBreak = $attendance->breaks()
-                ->whereNull('end_time')
-                ->latest()
-                ->first();
-        }
-
-        if (!$attendance) {
-            $status = '勤務外';
-        } elseif ($attendance->clock_out) {
-            $status = '退勤済';
-        } elseif ($todayBreak) {
-            $status ='休憩中';
-        } else {
-            $status ='出勤中';
-        }
+        $status = $attendance ? $attendance->getStatus() : Attendance::STATUS_OFF;
 
         $todayDate = Carbon::now()->isoFormat('Y年M月D日 (ddd) ');
         $currentTime = Carbon::now()->format('H:i');
@@ -54,10 +34,7 @@ class AttendanceController extends Controller
 
     public function end()
     {
-        $attendance =
-        Attendance::where('user_id',auth()->id())
-            ->whereDate('date',today())
-            ->first();
+        $attendance = Attendance::getTodayAttendance(auth()->id());
 
         $attendance->update(['clock_out' => now()]);
 

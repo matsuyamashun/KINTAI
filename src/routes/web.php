@@ -38,10 +38,10 @@ Route::middleware('auth')->group(function ()
 });
 
     //ログイン
-    Route::post('/login', [AuthController::class, 'store'])->name('login');
+Route::post('/login', [AuthController::class, 'store'])->name('login');
 
     //管理登録
-    Route::post('/register', [CustomRegisterController::class, 'store'])->name('register');
+Route::post('/register', [CustomRegisterController::class, 'store'])->name('register');
 
 
 

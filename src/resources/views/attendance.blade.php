@@ -18,15 +18,19 @@
         {{ $currentTime}}
     </div>
 
+    @php
+        use App\Models\Attendance;
+    @endphp
+
     <div class="attendance__button">
-        @if($status === '勤務外')
+        @if($status === Attendance::STATUS_OFF)
             <form action="{{ route('attendance.start') }}" method="POST">
                 @csrf
                 <button class="button__clock">出勤</button>
             </form>
         @endif
 
-        @if($status === '出勤中')
+        @if($status === Attendance::STATUS_WORKING)
             <form action="{{ route('attendance.end') }}" method="POST">
                 @csrf
                 <button class="button__clock">退勤</button>
@@ -38,14 +42,14 @@
             </form>
         @endif
 
-        @if($status === '休憩中')
+        @if($status === Attendance::STATUS_BREAK)
             <form action="{{ route('break.end') }}" method="POST">
                 @csrf
                 <button class="button__break">休憩戻</button>
             </form>
         @endif
 
-        @if($status === '退勤済')
+        @if($status === Attendance::STATUS_DONE)
             <p class="end__message">お疲れ様でした。</p>
         @endif
     </div>
