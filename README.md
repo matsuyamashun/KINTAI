@@ -9,7 +9,7 @@
 
 1.git clone  git@github.com:matsuyamashun/KINTAI.git
 
-Http版はっておきます　　
+Http版はっておきます　　https://github.com/matsuyamashun/KINTAI.git
 
 2.DockerDesktopアプリ立ち上げ
 
