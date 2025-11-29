@@ -7,9 +7,9 @@
 
 **Dockerビルド**
 
-1.git clone  
+1.git clone  git@github.com:matsuyamashun/KINTAI.git
 
-Http版はっておきます　　https://github.com/matsuyamashun/furima.git
+Http版はっておきます　　
 
 2.DockerDesktopアプリ立ち上げ
 
