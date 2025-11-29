@@ -52,3 +52,11 @@ php artisan migrate
 7.シーティングの実行
 
 php artisan db:seed
+
+<h2>URL</h2>
+
+・  開発環境::http://localhost
+
+.　メール認証::http://localhost:8025/
+
+.  phpMyAdmin::http://localhost:8080/
