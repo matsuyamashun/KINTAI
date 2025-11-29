@@ -57,6 +57,6 @@ php artisan db:seed
 
 ・  開発環境::http://localhost
 
-.　メール認証::http://localhost:8025/
+．　メール認証::http://localhost:8025/
 
-.  phpMyAdmin::http://localhost:8080/
+． phpMyAdmin::http://localhost:8080/
