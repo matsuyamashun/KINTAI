@@ -22,6 +22,17 @@ class Attendance extends Model
     const STATUS_BREAK = '休憩中';
     const STATUS_DONE = '退勤済';
 
+        //リレーション
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function breaks()
+    {
+        return $this->hasMany(BreakTime::class);
+    }
+
     public function getStatus()
     {
         if (!$this->clock_in) {
@@ -52,16 +63,5 @@ class Attendance extends Model
         return self::where('user_id', $userId)
             ->whereDate('date', today())
             ->first();
-    }
-
-    //リレーション
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function breaks()
-    {
-        return $this->hasMany(BreakTime::class);
     }
 }

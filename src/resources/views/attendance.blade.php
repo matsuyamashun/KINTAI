@@ -1,3 +1,7 @@
+@php
+    use App\Models\Attendance;
+@endphp
+
 @extends('includes.header')
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/attendance.css') }}" />
@@ -17,10 +21,6 @@
     <div class="attendance__time">
         {{ $currentTime}}
     </div>
-
-    @php
-        use App\Models\Attendance;
-    @endphp
 
     <div class="attendance__button">
         @if($status === Attendance::STATUS_OFF)

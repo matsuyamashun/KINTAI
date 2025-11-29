@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
-use App\Models\BreakTime;
 
 class BreakController extends Controller
 {
@@ -22,7 +21,7 @@ class BreakController extends Controller
     {
         $attendance = Attendance::getTodayAttendance(auth()->id());
 
-        $break = $attendance->breaks()->whereNull('end_time')->first();
+        $break = $attendance->getCurrentBreak();
 
         $break->update(['end_time' => now()]);
 

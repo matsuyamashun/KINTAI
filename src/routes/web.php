@@ -37,10 +37,10 @@ Route::middleware('auth')->group(function ()
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
-    //ログイン
+//ログイン
 Route::post('/login', [AuthController::class, 'store'])->name('login');
 
-    //管理登録
+//管理登録
 Route::post('/register', [CustomRegisterController::class, 'store'])->name('register');
 
 

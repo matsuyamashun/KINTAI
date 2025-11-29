@@ -18,7 +18,7 @@ class AttendanceController extends Controller
         $todayDate = Carbon::now()->isoFormat('Y年M月D日 (ddd) ');
         $currentTime = Carbon::now()->format('H:i');
 
-        return view('attendance',compact('attendance','status','todayDate','currentTime'));
+        return view('attendance',compact('status', 'todayDate', 'currentTime'));
     }
 
     public function start()
