@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BreakController;
 use App\Http\Controllers\CustomRegisterController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,16 +17,30 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::middleware('auth')->group(function ()
+{
+    Route::get('/attendance',[AttendanceController::class,'index'])->name('attendance');
 
+    //出勤
+    Route::post('/attendance/start',[AttendanceController::class,'start'])->name('attendance.start');
 
-Route::get('/attendance', function () {
-    return view('attendance');
-})->name('attendance');
+    //退勤
+    Route::post('/attendance/end',[AttendanceController::class,'end'])->name('attendance.end');
 
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    // 休憩開始
+    Route::post('/break/start',[BreakController::class,'start'])->name('break.start');
 
+    //休憩終了
+    Route::post('/break/end',[BreakController::class,'end'])->name('break.end');
+
+    //ログアウト
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});
+
+//ログイン
 Route::post('/login', [AuthController::class, 'store'])->name('login');
 
+//管理登録
 Route::post('/register', [CustomRegisterController::class, 'store'])->name('register');
 
 
