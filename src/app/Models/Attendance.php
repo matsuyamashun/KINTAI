@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -63,5 +64,51 @@ class Attendance extends Model
         return self::where('user_id', $userId)
             ->whereDate('date', today())
             ->first();
+    }
+
+    public static function getMonthlyAttendance($userId, $year = null, $month = null)
+    {
+        $date = Carbon::create($year ?? now()->year, $month ?? now()->month, 1);
+
+        return self::where('user_id', $userId)
+            ->whereYear('date', $date->year)
+            ->whereMonth('date', $date->month)
+            ->orderBy('date')
+            ->get();
+    }
+
+    public static function getPrevMonth(Carbon $date)
+    {
+        return $date->copy()->subMonth();
+    }
+
+    public static function getNextMonth(Carbon $date)
+    {
+        return $date->copy()->addMonth();
+    }
+
+    public function totalBreakTime()
+    {
+        return $this->breaks->sum(function ($break) {
+            if (!$break->end_time) return 0;
+
+            return Carbon::parse($break->start_time)
+                ->diffInMinutes(Carbon::parse($break->end_time));
+        });
+    }
+
+    //休憩時間計算しない
+    public function workingHours()
+    {
+        if (!$this->clock_in || !$this->clock_out) {
+            return null;
+        }
+
+        $workMinutes = Carbon::parse($this->clock_in)
+            ->diffInMinutes(Carbon::parse($this->clock_out));
+
+        $breakMinutes = $this->totalBreakTime();
+
+        return $workMinutes - $breakMinutes;
     }
 }
