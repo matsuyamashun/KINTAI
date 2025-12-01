@@ -21,6 +21,9 @@ Route::middleware('auth')->group(function ()
 {
     Route::get('/attendance',[AttendanceController::class,'index'])->name('attendance');
 
+    //勤怠一覧
+    Route::get('/attendance/list/{ym?}',[AttendanceController::class,'list'])->name('attendance.list');
+
     //出勤
     Route::post('/attendance/start',[AttendanceController::class,'start'])->name('attendance.start');
 

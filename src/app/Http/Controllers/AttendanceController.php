@@ -40,4 +40,18 @@ class AttendanceController extends Controller
 
         return redirect()->route('attendance');
     }
+
+    public function list($year = null, $month = null)
+    {
+        $date = Carbon::create($year ?? now()->year, $month ?? now()->month)
+                ->startOfMonth();
+
+        $prevDate = $date->copy()->subMonth();
+        $nextDate = $date->copy()->addMonth();
+
+        $attendances = Attendance::getMonthlyAttendance(auth()->id(), $date);
+
+        
+        return view('list',compact('date', 'prevDate', 'nextDate', 'attendances'));
+    }
 }

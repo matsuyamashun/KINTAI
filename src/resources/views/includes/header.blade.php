@@ -22,7 +22,7 @@
 
             <div class="header__nav">
                 <a class="header__nav__item" href="{{ route('attendance') }}">勤怠</a>
-                <a class="header__nav__item" href="#">勤怠一覧</a>
+                <a class="header__nav__item" href="{{ route('attendance.list')}}">勤怠一覧</a>
                 <a class="header__nav__item" href="#">申請</a>
                 <form class="header__nav__item" action="{{ route('logout') }}" method="POST">
                 @csrf

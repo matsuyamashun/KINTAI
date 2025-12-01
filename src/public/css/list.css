@@ -1,0 +1,66 @@
+.content {
+    width: 100%;
+    display: grid;
+}
+
+.content__title {
+    width: 70%;
+    margin: 50px auto;
+    border-left: 10px solid #000000;
+    padding: 5px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.month__nav {
+    width: 70%;
+    margin: 0px auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.nav__button {
+    text-decoration: none;
+    color: #858585;
+}
+
+span,
+.current__month{
+    font-weight: bold;
+}
+
+.attendance__table {
+    width: 70%;
+    margin: 40px auto;
+    background-color: white;
+    border-radius: 5px;
+    color: #858585;
+}
+
+.attendance__table tr {
+    position: relative;
+}
+
+.attendance__table tr::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 40px;
+    border-top: 2px solid #dbdbdb;
+    pointer-events: none;
+}
+
+.table__cell {
+    border-bottom: 2px solid #a4a2a2;
+    padding: 10px 0 0 30px;
+}
+
+.table__detail {
+    font-weight: bold;
+    color: #000000;
+}
