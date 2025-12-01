@@ -43,16 +43,15 @@ class AttendanceController extends Controller
 
     public function list($year = null, $month = null)
     {
-        $date = Carbon::create($year ?? now()->year, $month ?? now()->month);
+        $date = Carbon::create($year ?? now()->year, $month ?? now()->month)
+                ->startOfMonth();
 
-        $attendances = Attendance::getMonthlyAttendance(auth()->id(), $date->year, $date->month);
+        $prevDate = $date->copy()->subMonth();
+        $nextDate = $date->copy()->addMonth();
 
-        //あとで見たときわかりやすいよう連想配列！
-        return view('list',[
-            'attendances' => $attendances,
-            'date' => $date,
-            'prevDate' => Attendance::getPrevMonth($date),
-            'nextDate' => Attendance::getNextMonth($date),
-        ]);
+        $attendances = Attendance::getMonthlyAttendance(auth()->id(), $date);
+
+        
+        return view('list',compact('date', 'prevDate', 'nextDate', 'attendances'));
     }
 }

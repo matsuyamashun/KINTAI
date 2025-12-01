@@ -66,25 +66,13 @@ class Attendance extends Model
             ->first();
     }
 
-    public static function getMonthlyAttendance($userId, $year = null, $month = null)
+    public static function getMonthlyAttendance($userId, Carbon $date)
     {
-        $date = Carbon::create($year ?? now()->year, $month ?? now()->month, 1);
-
         return self::where('user_id', $userId)
             ->whereYear('date', $date->year)
             ->whereMonth('date', $date->month)
             ->orderBy('date')
             ->get();
-    }
-
-    public static function getPrevMonth(Carbon $date)
-    {
-        return $date->copy()->subMonth();
-    }
-
-    public static function getNextMonth(Carbon $date)
-    {
-        return $date->copy()->addMonth();
     }
 
     public function totalBreakTime()
