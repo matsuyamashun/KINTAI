@@ -35,7 +35,7 @@ class Attendance extends Model
         return $this->hasMany(BreakTime::class);
     }
 
-    public function correctionRequests()
+    public function stampCorrectionRequests()
     {
         return $this->hasMany(StampCorrectionRequest::class);
     }
@@ -101,7 +101,7 @@ class Attendance extends Model
     public function workingHours()
     {
         if (!$this->clock_in || !$this->clock_out) {
-        return null;
+            return null;
         }
 
         $workMinutes = Carbon::parse($this->clock_in)
@@ -111,11 +111,13 @@ class Attendance extends Model
         $minutes = $workMinutes - $breakMinutes;
 
         return $this->formatToTime($minutes); 
-}
+    }
 
     private function formatToTime($minutes)
     {
-        if ($minutes === null) return null;
+        if (is_null($minutes)) {
+        return;
+    }
 
         return sprintf('%02d:%02d', floor($minutes / 60), $minutes % 60);
     }
@@ -128,5 +130,13 @@ class Attendance extends Model
             return Carbon::parse($break->start_time)
                 ->diffInMinutes(Carbon::parse($break->end_time));
         });
+    }
+
+        public function getPendingRequest()
+    {
+        return $this->stampCorrectionRequests()
+            ->where('status', 'pending')
+            ->latest()
+            ->first();
     }
 }

@@ -37,7 +37,7 @@
             @foreach($attendanceList as $item)    
                 @php
                     $attendance = $item['attendance'];
-                    $day = Carbon::parse($item['date']);
+                    $day = $item['date'];
                 @endphp
 
                 <tr>   

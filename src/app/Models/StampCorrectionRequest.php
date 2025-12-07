@@ -12,9 +12,6 @@ class StampCorrectionRequest extends Model
     protected $fillable = [
         'attendance_id',
         'user_id',
-        'old_clock_in',
-        'old_clock_out',
-        'old_breaks',
         'new_clock_in',
         'new_clock_out',
         'new_breaks',

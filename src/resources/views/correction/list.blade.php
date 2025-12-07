@@ -4,7 +4,7 @@
 
 @extends('includes.header')
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/correction.list.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/correction_list.css') }}" />
 @endsection
 
 @section('content')
@@ -50,7 +50,7 @@
                     <td>{{ $request->created_at->format('Y/m/d') }}</td>
 
                     <td>
-                        <a class="attendance__detail" href="{{ route('attendance.detail',$request->attendance_id) }}">
+                        <a class="attendance__detail" href="{{ route('attendance.detail', $request->attendance_id) }}">
                             詳細
                         </a>
                     </td>

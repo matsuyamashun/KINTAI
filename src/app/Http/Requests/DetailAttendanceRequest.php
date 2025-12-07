@@ -58,8 +58,6 @@ class DetailAttendanceRequest extends FormRequest
         });
     }
 
-    
-
     public function messages()
     {
         return [

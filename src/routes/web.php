@@ -7,7 +7,6 @@ use App\Http\Controllers\CustomRegisterController;
 use App\Http\Controllers\StampCorrectionRequestController;
 use Illuminate\Support\Facades\Route;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,8 +45,7 @@ Route::middleware('auth')->group(function ()
     )->name('correction.list');
 
     //詳細編集
-    Route::get('attendance/detail/{attendance}', [AttendanceController::class, 'show'])
-    ->name('attendance.detail');
+    Route::get('attendance/detail/{attendance}', [AttendanceController::class, 'show'])->name('attendance.detail');
 
     //保存処理
     Route::patch('attendance/detail/{attendance}',[StampCorrectionRequestController::class,'store'])->name('correction.store');

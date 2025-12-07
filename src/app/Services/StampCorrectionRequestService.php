@@ -31,10 +31,6 @@ class StampCorrectionRequestService
             'attendance_id' => $attendance->id,
             'user_id' => auth()->id(),
 
-            'old_clock_in' => $attendance->clock_in,
-            'old_clock_out' => $attendance->clock_out,
-            'old_breaks' => json_encode($oldBreaks),
-
             'new_clock_in'  => $request->clock_in,
             'new_clock_out' => $request->clock_out,
             'new_breaks'    => json_encode($newBreaks),
@@ -44,7 +40,7 @@ class StampCorrectionRequestService
         ]);
     }
 
-    public function getUserRequests($userId)
+    public function getUserRequests(int $userId)
     {
         return StampCorrectionRequest::where('user_id', $userId)
             ->orderBy('created_at')
@@ -63,5 +59,4 @@ class StampCorrectionRequestService
             ->latest()
             ->get();
     }
-
 }

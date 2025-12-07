@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\DetailAttendanceRequest;
 use App\Models\Attendance;
-use App\Models\BreakTime;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -57,7 +55,7 @@ class AttendanceController extends Controller
         $attendanceList = [];
 
         for ($i = 1; $i <= $lastDay; $i++) {
-            $day = $date->copy()->day($i)->toDateString();
+            $day = $date->copy()->day($i);
 
             $attendanceList[] = [
                 'date' => $day,
@@ -65,15 +63,12 @@ class AttendanceController extends Controller
             ];
         }
 
-        return view('list',compact('date', 'prevDate', 'nextDate', 'attendanceList'));
+        return view('list', compact('date', 'prevDate', 'nextDate', 'attendanceList'));
     }
 
     public function show(Attendance $attendance)
     {
-        $pendingRequest = $attendance->correctionRequests()
-            ->where('status', 'pending')
-            ->latest()
-            ->first();
+        $pendingRequest = $attendance->getPendingRequest();
 
         $breaks = $attendance->breaks->map(function ($break) {
             return [
@@ -82,6 +77,6 @@ class AttendanceController extends Controller
             ];
         })->toArray();
 
-        return view('detail', compact('attendance','pendingRequest','breaks'));
+        return view('detail', compact('attendance', 'pendingRequest', 'breaks'));
     }
 }
