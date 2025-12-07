@@ -4,7 +4,7 @@
 }
 
 .content__title {
-    width: 70%;
+    width: 80%;
     margin: 50px auto;
     border-left: 10px solid #000000;
     padding: 5px;
@@ -13,7 +13,7 @@
 }
 
 .month__nav {
-    width: 70%;
+    width: 80%;
     margin: 0px auto;
     display: flex;
     align-items: center;
@@ -34,33 +34,31 @@ span,
 }
 
 .attendance__table {
-    width: 70%;
+    width: 80%;
     margin: 40px auto;
     background-color: white;
     border-radius: 5px;
     color: #858585;
 }
 
-.attendance__table tr {
-    position: relative;
+.attendance__table th {
+    border-bottom: 2px solid #8d8d8d;
+    padding: 5px;
 }
 
-.attendance__table tr::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 40px;
-    border-top: 2px solid #dbdbdb;
-    pointer-events: none;
+.attendance__table td {
+    border-bottom: 2px solid #ddd;
 }
 
 .table__cell {
-    border-bottom: 2px solid #a4a2a2;
-    padding: 10px 0 0 30px;
+    width: 120px;
+    text-align: center;
+    white-space: nowrap;
+    padding: 5px;
 }
 
-.table__detail {
+.table__cell a {
     font-weight: bold;
+    text-decoration: none;
     color: #000000;
 }
