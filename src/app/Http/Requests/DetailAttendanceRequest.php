@@ -70,7 +70,7 @@ class DetailAttendanceRequest extends FormRequest
             'breaks.*.end_time.date_format'   => '休憩終了時間が不適切な値です',
 
             'note.required' => '備考を記入してください',
-            'note.max' => '備考は255文字以内で記入してください',
+            'note.max' => '備考は:max文字以内で記入してください',
         ];
     }
 }

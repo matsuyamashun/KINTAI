@@ -20,9 +20,11 @@ class StampCorrectionRequest extends Model
     ];
 
     protected $casts = [
-        'old_breaks' => 'array',
         'new_breaks' => 'array',
     ];
+
+    public const STATUS_PENDING = 'pending';
+    public const STATUS_APPROVED = 'approved';
 
     public function attendance()
     {

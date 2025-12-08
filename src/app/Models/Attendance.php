@@ -110,7 +110,7 @@ class Attendance extends Model
         $breakMinutes = $this->totalBreakTimeRaw(); 
         $minutes = $workMinutes - $breakMinutes;
 
-        return $this->formatToTime($minutes); 
+            return $this->formatToTime($minutes); 
     }
 
     private function formatToTime($minutes)
@@ -132,7 +132,7 @@ class Attendance extends Model
         });
     }
 
-        public function getPendingRequest()
+    public function getPendingRequest()
     {
         return $this->stampCorrectionRequests()
             ->where('status', 'pending')

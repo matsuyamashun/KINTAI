@@ -1,4 +1,4 @@
-@php 
+@php
     use Carbon\Carbon;
 @endphp
 
@@ -34,23 +34,19 @@
         </thead>
         
         <tobody>
-            @foreach($attendanceList as $item)    
-                @php
-                    $attendance = $item['attendance'];
-                    $day = $item['date'];
-                @endphp
+            @foreach($attendanceList as $date => $attendance)   
 
                 <tr>   
                     <td class="table__cell">
-                        {{ $day->isoFormat('M/D(dd)') }}
+                        {{ $date }}
                     </td>
                     
                     <td class="table__cell">
-                        {{ $attendance?->clock_in ? Carbon::parse($attendance->clock_in)->format('H:i') : '' }}
+                        {{ $attendance?->clock_in ? \Carbon\Carbon::parse($attendance->clock_in)->format('H:i') : '' }}
                     </td>
 
                     <td class="table__cell">
-                        {{ $attendance?->clock_out ? Carbon::parse($attendance->clock_out)->format('H:i') : '' }} 
+                        {{ $attendance?->clock_out ? \Carbon\Carbon::parse($attendance->clock_out)->format('H:i') : '' }}
                     </td>
  
                     <td class="table__cell"> 
@@ -63,7 +59,7 @@
 
                     <td class="table__cell">
                         @if($attendance)
-                            <a href="{{ route('attendance.detail',$attendance->id) }}">詳細</a>
+                            <a href="{{ route('attendance.detail', $attendance->id) }}">詳細</a>
                         @else 
                             --
                         @endif

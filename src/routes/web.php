@@ -34,21 +34,19 @@ Route::middleware('auth')->group(function ()
     Route::post('/break/start',[BreakController::class,'start'])->name('break.start');
 
     //休憩終了
-    Route::post('/break/end',[BreakController::class,'end'])->name('break.end');
+    Route::post('/break/end', [BreakController::class,'end'])->name('break.end');
 
     //ログアウト
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     //申請一覧
-    Route::get('/stamp_correction_request/list', 
-    [StampCorrectionRequestController::class, 'index']
-    )->name('correction.list');
+    Route::get('/stamp_correction_request/list', [StampCorrectionRequestController::class, 'index'])->name('correction.list');
 
     //詳細編集
     Route::get('attendance/detail/{attendance}', [AttendanceController::class, 'show'])->name('attendance.detail');
 
     //保存処理
-    Route::patch('attendance/detail/{attendance}',[StampCorrectionRequestController::class,'store'])->name('correction.store');
+    Route::patch('attendance/detail/{attendance}', [StampCorrectionRequestController::class,'store'])->name('correction.store');
 });
 
 //ログイン

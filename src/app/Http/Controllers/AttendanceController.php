@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Attendance;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
 {
@@ -57,10 +56,8 @@ class AttendanceController extends Controller
         for ($i = 1; $i <= $lastDay; $i++) {
             $day = $date->copy()->day($i);
 
-            $attendanceList[] = [
-                'date' => $day,
-                'attendance' => Attendance::getAttendanceByDate(auth()->id(), $day)
-            ];
+            $attendanceList[$day->isoFormat('M/D(dd)')] = 
+                Attendance::getAttendanceByDate(auth()->id(), $day);
         }
 
         return view('list', compact('date', 'prevDate', 'nextDate', 'attendanceList'));

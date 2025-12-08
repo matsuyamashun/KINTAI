@@ -36,7 +36,7 @@ class StampCorrectionRequestService
             'new_breaks'    => json_encode($newBreaks),
 
             'note' => $request->note,
-            'status' => 'pending',
+            'status' => StampCorrectionRequest::STATUS_PENDING,
         ]);
     }
 
@@ -50,11 +50,11 @@ class StampCorrectionRequestService
     public function getListByTab(string $tab, int $userId)
     {
         return StampCorrectionRequest::where('user_id', $userId)
-            ->when($tab === 'pending', function($q){
-                $q->where('status', 'pending');
+            ->when($tab === StampCorrectionRequest::STATUS_PENDING, function($q){
+                $q->where('status', StampCorrectionRequest::STATUS_PENDING);
             })
-            ->when($tab === 'approved', function($q){
-                $q->where('status', 'approved');
+            ->when($tab === StampCorrectionRequest::STATUS_APPROVED, function($q){
+                $q->where('status', StampCorrectionRequest::STATUS_APPROVED);
             })
             ->latest()
             ->get();

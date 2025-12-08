@@ -1,5 +1,6 @@
 @php
     use Carbon\Carbon;
+    use App\Models\StampCorrectionRequest;
 @endphp
 
 @extends('includes.header')
@@ -34,9 +35,9 @@
             @foreach ($requests as $request)
                 <tr>
                     <td>
-                        @if($request->status === 'pending')
+                        @if($request->status === StampCorrectionRequest::STATUS_PENDING)
                             承認待ち
-                        @elseif($request->status === 'approved')
+                        @elseif($request->status === StampCorrectionRequest::STATUS_APPROVED)
                             承認済み
                         @endif
                     </td>
