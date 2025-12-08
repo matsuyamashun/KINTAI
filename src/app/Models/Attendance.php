@@ -15,6 +15,7 @@ class Attendance extends Model
         'date',
         'clock_in',
         'clock_out',
+        'note',
     ];
 
     //定数
@@ -32,6 +33,11 @@ class Attendance extends Model
     public function breaks()
     {
         return $this->hasMany(BreakTime::class);
+    }
+
+    public function stampCorrectionRequests()
+    {
+        return $this->hasMany(StampCorrectionRequest::class);
     }
 
     public function getStatus()
@@ -59,11 +65,16 @@ class Attendance extends Model
             ->first();
     }
 
-    public static function getTodayAttendance($userId)
+    public static function getAttendanceByDate($userId, $date)
     {
         return self::where('user_id', $userId)
-            ->whereDate('date', today())
+            ->whereDate('date', $date)
             ->first();
+    }
+
+    public static function getTodayAttendance($userId)
+    {
+        return self::getAttendanceByDate($userId, today());
     }
 
     public static function getMonthlyAttendance($userId, Carbon $date)
@@ -77,15 +88,16 @@ class Attendance extends Model
 
     public function totalBreakTime()
     {
-        return $this->breaks->sum(function ($break) {
+        $minutes = $this->breaks->sum(function ($break) {
             if (!$break->end_time) return 0;
 
             return Carbon::parse($break->start_time)
                 ->diffInMinutes(Carbon::parse($break->end_time));
         });
+
+        return $this->formatToTime($minutes); 
     }
 
-    //休憩時間計算しない
     public function workingHours()
     {
         if (!$this->clock_in || !$this->clock_out) {
@@ -95,8 +107,36 @@ class Attendance extends Model
         $workMinutes = Carbon::parse($this->clock_in)
             ->diffInMinutes(Carbon::parse($this->clock_out));
 
-        $breakMinutes = $this->totalBreakTime();
+        $breakMinutes = $this->totalBreakTimeRaw(); 
+        $minutes = $workMinutes - $breakMinutes;
 
-        return $workMinutes - $breakMinutes;
+            return $this->formatToTime($minutes); 
+    }
+
+    private function formatToTime($minutes)
+    {
+        if (is_null($minutes)) {
+        return;
+    }
+
+        return sprintf('%02d:%02d', floor($minutes / 60), $minutes % 60);
+    }
+
+    private function totalBreakTimeRaw()
+    {
+        return $this->breaks->sum(function ($break) {
+            if (!$break->end_time) return 0;
+
+            return Carbon::parse($break->start_time)
+                ->diffInMinutes(Carbon::parse($break->end_time));
+        });
+    }
+
+    public function getPendingRequest()
+    {
+        return $this->stampCorrectionRequests()
+            ->where('status', 'pending')
+            ->latest()
+            ->first();
     }
 }

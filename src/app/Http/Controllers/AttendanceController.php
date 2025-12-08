@@ -49,9 +49,31 @@ class AttendanceController extends Controller
         $prevDate = $date->copy()->subMonth();
         $nextDate = $date->copy()->addMonth();
 
-        $attendances = Attendance::getMonthlyAttendance(auth()->id(), $date);
+        $lastDay = $date->copy()->endOfMonth()->day;
 
-        
-        return view('list',compact('date', 'prevDate', 'nextDate', 'attendances'));
+        $attendanceList = [];
+
+        for ($i = 1; $i <= $lastDay; $i++) {
+            $day = $date->copy()->day($i);
+
+            $attendanceList[$day->isoFormat('M/D(dd)')] = 
+                Attendance::getAttendanceByDate(auth()->id(), $day);
+        }
+
+        return view('list', compact('date', 'prevDate', 'nextDate', 'attendanceList'));
+    }
+
+    public function show(Attendance $attendance)
+    {
+        $pendingRequest = $attendance->getPendingRequest();
+
+        $breaks = $attendance->breaks->map(function ($break) {
+            return [
+                'start_time' => $break->start_time,
+                'end_time'   => $break->end_time,
+            ];
+        })->toArray();
+
+        return view('detail', compact('attendance', 'pendingRequest', 'breaks'));
     }
 }

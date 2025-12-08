@@ -4,8 +4,8 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BreakController;
 use App\Http\Controllers\CustomRegisterController;
+use App\Http\Controllers\StampCorrectionRequestController;
 use Illuminate\Support\Facades\Route;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -34,10 +34,19 @@ Route::middleware('auth')->group(function ()
     Route::post('/break/start',[BreakController::class,'start'])->name('break.start');
 
     //休憩終了
-    Route::post('/break/end',[BreakController::class,'end'])->name('break.end');
+    Route::post('/break/end', [BreakController::class,'end'])->name('break.end');
 
     //ログアウト
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    //申請一覧
+    Route::get('/stamp_correction_request/list', [StampCorrectionRequestController::class, 'index'])->name('correction.list');
+
+    //詳細編集
+    Route::get('attendance/detail/{attendance}', [AttendanceController::class, 'show'])->name('attendance.detail');
+
+    //保存処理
+    Route::patch('attendance/detail/{attendance}', [StampCorrectionRequestController::class,'store'])->name('correction.store');
 });
 
 //ログイン

@@ -1,4 +1,4 @@
-@php 
+@php
     use Carbon\Carbon;
 @endphp
 
@@ -14,59 +14,59 @@
     </div>
 
     <div class="month__nav">
-        <a class="nav__button" href="{{ route('attendance.list',[$prevDate->year, $prevDate->month]) }}"><span>←</span>前月</a>
+        <a class="nav__button" href="{{ route('attendance.list', $prevDate->format('Y-m')) }}"><span>←</span>前月</a>
 
         <p class="current__month">{{ $date->format('Y/m') }}</p>
 
-        <a class="nav__button" href="{{ route('attendance.list',[$nextDate->year, $nextDate->month]) }}">翌月<span>→</span></a>
+        <a class="nav__button" href="{{ route('attendance.list',$nextDate->format('Y-m')) }}">翌月<span>→</span></a>
     </div>
 
     <table class="attendance__table">
-        @foreach ($attendances as $attendance)
+        <thead>
             <tr>
-                <td class="table__cell">
-                    <div class="cell__label">日付</div>
-                    <div class="cell__value">
-                        <p>{{ Carbon::parse($attendance->date)->isoFormat('M/D(dd)') }}</p>
-                    </div>
-                </td>
-
-                <td class="table__cell">
-                    <div class="cell__label">出勤</div>
-                    <div class="cell__value">
-                        <p>{{ Carbon::parse($attendance->clock_in)->format('H:i') }}</p>
-                    </div>
-                </td>
-
-                <td class="table__cell">
-                    <div class="cell__label">退勤</div>
-                    <div class="cell__value">
-                        <p>{{ Carbon::parse($attendance->clock_out)->format('H:i') }}</p>
-                    </div>
-                </td>
-
-                <td class="table__cell">
-                    <div class="cell__label">休憩</div>
-                    <div class="cell__value">
-                        <p>{{ $attendance->totalBreakTime() }}</p>
-                    </div>
-                </td>
-
-                <td class="table__cell">
-                    <div class="cell__label">合計</div>
-                    <div class="cell__value">
-                        <p>{{ $attendance->workingHours() }}</p>
-                    </div>
-                </td>
-
-                <td class="table__cell">
-                    <div class="cell__label">詳細</div>
-                    <div class="cell__value table__detail">
-                        <p>#</p>
-                    </div>
-                </td>
+                <th>日付</th>
+                <th>出勤</th>
+                <th>退勤</th>
+                <th>休憩</th>
+                <th>合計</th>
+                <th>詳細</th>
             </tr>
-        @endforeach
+        </thead>
+        
+        <tobody>
+            @foreach($attendanceList as $date => $attendance)   
+
+                <tr>   
+                    <td class="table__cell">
+                        {{ $date }}
+                    </td>
+                    
+                    <td class="table__cell">
+                        {{ $attendance?->clock_in ? \Carbon\Carbon::parse($attendance->clock_in)->format('H:i') : '' }}
+                    </td>
+
+                    <td class="table__cell">
+                        {{ $attendance?->clock_out ? \Carbon\Carbon::parse($attendance->clock_out)->format('H:i') : '' }}
+                    </td>
+ 
+                    <td class="table__cell"> 
+                        {{ $attendance ? $attendance->totalBreakTime() : '' }} 
+                    </td>
+
+                    <td class="table__cell"> 
+                        {{ $attendance ? $attendance->workingHours() : '' }}
+                    </td>
+
+                    <td class="table__cell">
+                        @if($attendance)
+                            <a href="{{ route('attendance.detail', $attendance->id) }}">詳細</a>
+                        @else 
+                            --
+                        @endif
+                    </td>
+                </tr>           
+            @endforeach
+        </tobody>
     </table>
 </div>
 @endsection
