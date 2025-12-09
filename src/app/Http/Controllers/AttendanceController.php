@@ -56,7 +56,7 @@ class AttendanceController extends Controller
         for ($i = 1; $i <= $lastDay; $i++) {
             $day = $date->copy()->day($i);
 
-            $attendanceList[$day->isoFormat('M/D(dd)')] = 
+            $attendanceList[$day->isoFormat('M/D(dd)')] =
                 Attendance::getAttendanceByDate(auth()->id(), $day);
         }
 
