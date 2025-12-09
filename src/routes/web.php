@@ -5,6 +5,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BreakController;
 use App\Http\Controllers\CustomRegisterController;
 use App\Http\Controllers\StampCorrectionRequestController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +21,25 @@ use Illuminate\Support\Facades\Route;
 */
 Route::middleware('auth')->group(function ()
 {
+    // メール認証画面
+    Route::get('/email/verify', function () {
+        return view('auth.verify-email');
+    })->name('verification.notice');
+
+    // メール認証とリダイレクト先
+    Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+        $request->fulfill();
+        return redirect('/attendance');
+    })->middleware('signed')
+      ->name('verification.verify');
+
+    // メール認証再送
+    Route::post('/email/verification-notification', function (Request $request) {
+        $request->user()->sendEmailVerificationNotification();
+
+        return back();
+    })->name('verification.send');
+
     Route::get('/attendance',[AttendanceController::class,'index'])->name('attendance');
 
     //勤怠一覧
@@ -54,6 +75,3 @@ Route::post('/login', [AuthController::class, 'store'])->name('login');
 
 //管理登録
 Route::post('/register', [CustomRegisterController::class, 'store'])->name('register');
-
-
-
