@@ -27,5 +27,9 @@ class AdminLoginController extends Controller
             Auth::guard('admin')->logout();
             return back();
         }
+
+        return back()->withErrors([
+            'email' => 'ログイン情報が登録されてません',
+        ]);
     }
 }
