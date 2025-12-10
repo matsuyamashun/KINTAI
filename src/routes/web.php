@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BreakController;
@@ -70,8 +71,20 @@ Route::middleware('auth')->group(function ()
     Route::patch('attendance/detail/{attendance}', [StampCorrectionRequestController::class,'store'])->name('correction.store');
 });
 
+//管理者のルート
+Route::middleware(['auth:admin', 'admin'])->group(function () {
+    Route::get('/admin/attendance_list', function () {
+        return view('admin.attendance_list');
+    })->name('admin.attendance_list');
+});
+
 //ログイン
 Route::post('/login', [AuthController::class, 'store'])->name('login');
 
 //管理登録
 Route::post('/register', [CustomRegisterController::class, 'store'])->name('register');
+
+//管理者ログイン
+Route::get('/admin/login', [AdminLoginController::class, 'index'])->name('admin.login');
+
+Route::post('/admin/login', [AdminLoginController::class, 'login']);

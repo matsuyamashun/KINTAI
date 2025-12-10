@@ -12,11 +12,15 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+    const ROLE_USER = 0;
+    const ROLE_ADMIN = 1;
+
+    //ここでユーザーが管理者か判定
+    public function isAdmin()
+    {
+        return $this->role === self::ROLE_ADMIN;
+    }
+
     protected $fillable = [
         'name',
         'email',
