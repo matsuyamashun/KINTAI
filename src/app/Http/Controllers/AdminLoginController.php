@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,7 +26,7 @@ class AdminLoginController extends Controller
 
         $user = Auth::guard('admin')->user();
 
-        if (!$user->role === 1) {
+        if ($user->role !== User::ROLE_ADMIN) {
             Auth::guard('admin')->logout();
             return back();
         }
