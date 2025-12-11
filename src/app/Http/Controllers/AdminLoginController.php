@@ -16,20 +16,21 @@ class AdminLoginController extends Controller
     {
         $credentials = $request->validated();
 
-        if (Auth::guard('admin')->attempt($credentials)) {
-            $user = Auth::guard('admin')->user();
+        //ログイン失敗
+        if (!Auth::guard('admin')->attempt($credentials)) {
+            return back()->withErros([
+                'email' => 'ログイン情報が登録されてません',
+            ]);
+        }
 
-            if ($user->role === 1) {
-                return redirect()->route('admin.attendance_list');
-            }
+        $user = Auth::guard('admin')->user();
 
-            //管理者じゃないとき
+        if (!$user->role === 1) {
             Auth::guard('admin')->logout();
             return back();
         }
 
-        return back()->withErrors([
-            'email' => 'ログイン情報が登録されてません',
-        ]);
+        //ここでログイン
+        return redirect()->route('admin.attendance_list');
     }
 }

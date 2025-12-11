@@ -15,12 +15,6 @@ class User extends Authenticatable implements MustVerifyEmail
     const ROLE_USER = 0;
     const ROLE_ADMIN = 1;
 
-    //ここでユーザーが管理者か判定
-    public function isAdmin()
-    {
-        return $this->role === self::ROLE_ADMIN;
-    }
-
     protected $fillable = [
         'name',
         'email',
