@@ -32,15 +32,15 @@
                 <th>詳細</th>
             </tr>
         </thead>
-        
-        <tobody>
-            @foreach($attendanceList as $date => $attendance)   
 
-                <tr>   
+        <tobody>
+            @foreach($attendanceList as $date => $attendance)
+
+                <tr>
                     <td class="table__cell">
                         {{ $date }}
                     </td>
-                    
+
                     <td class="table__cell">
                         {{ $attendance?->clock_in ? \Carbon\Carbon::parse($attendance->clock_in)->format('H:i') : '' }}
                     </td>
@@ -48,23 +48,23 @@
                     <td class="table__cell">
                         {{ $attendance?->clock_out ? \Carbon\Carbon::parse($attendance->clock_out)->format('H:i') : '' }}
                     </td>
- 
-                    <td class="table__cell"> 
-                        {{ $attendance ? $attendance->totalBreakTime() : '' }} 
+
+                    <td class="table__cell">
+                        {{ $attendance ? $attendance->totalBreakTime() : '' }}
                     </td>
 
-                    <td class="table__cell"> 
+                    <td class="table__cell">
                         {{ $attendance ? $attendance->workingHours() : '' }}
                     </td>
 
                     <td class="table__cell">
                         @if($attendance)
                             <a href="{{ route('attendance.detail', $attendance->id) }}">詳細</a>
-                        @else 
+                        @else
                             --
                         @endif
                     </td>
-                </tr>           
+                </tr>
             @endforeach
         </tobody>
     </table>
