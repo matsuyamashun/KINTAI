@@ -11,11 +11,11 @@
     @yield('css')
 </head>
 
-<body>
+<body classs="attendance__body">
     <header class="header">
         <div class="header__inner">
             <div class="header-utilities">
-                <a class="header__logo" href="{{ route('attendance') }}">
+                <a class="header__logo" href="{{ route('admin.attendance_list') }}">
                     <img src="{{ asset('images/COACHTECHヘッダーロゴ.png')}}" alt="logo">
                 </a>
             </div>

@@ -7,9 +7,9 @@ use Carbon\Carbon;
 
 class AdminAttendanceController extends Controller
 {
-    public function list($ymd = null)
+    public function list($targetDate = null)
     {
-        $date = $ymd ? Carbon::parse($ymd) : Carbon::today();
+        $date = $targetDate ? Carbon::parse($targetDate) : Carbon::today();
 
         $attendances = Attendance::getAllByDate($date);
 

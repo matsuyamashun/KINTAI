@@ -28,7 +28,7 @@
     color: #858585;
 }
 
-span,
+.span__item,
 .current__month {
     font-weight: bold;
 }
