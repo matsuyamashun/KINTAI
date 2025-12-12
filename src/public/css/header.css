@@ -33,9 +33,3 @@
 body {
     background-color: #edeaea;
 }
-
-@media(max-width: 480px) {
-    .header {
-        max-width: 100%;
-    }
-}

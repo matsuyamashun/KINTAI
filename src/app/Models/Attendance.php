@@ -86,6 +86,14 @@ class Attendance extends Model
             ->get();
     }
 
+    public static function getAllByDate($date)
+    {
+        return self::whereDate('date', $date)
+            ->with(['user'])
+            ->orderBy('user_id')
+            ->get();
+    }
+
     public function totalBreakTime()
     {
         $minutes = $this->breaks->sum(function ($break) {
@@ -95,7 +103,7 @@ class Attendance extends Model
                 ->diffInMinutes(Carbon::parse($break->end_time));
         });
 
-        return $this->formatToTime($minutes); 
+        return $this->formatToTime($minutes);
     }
 
     public function workingHours()
@@ -107,10 +115,10 @@ class Attendance extends Model
         $workMinutes = Carbon::parse($this->clock_in)
             ->diffInMinutes(Carbon::parse($this->clock_out));
 
-        $breakMinutes = $this->totalBreakTimeRaw(); 
+        $breakMinutes = $this->totalBreakTimeRaw();
         $minutes = $workMinutes - $breakMinutes;
 
-            return $this->formatToTime($minutes); 
+            return $this->formatToTime($minutes);
     }
 
     private function formatToTime($minutes)
