@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminAttendanceController;
 use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AuthController;
@@ -73,9 +74,13 @@ Route::middleware('auth')->group(function ()
 
 //管理者のルート
 Route::middleware(['auth:admin', 'admin'])->group(function () {
-    Route::get('/admin/attendance_list', function () {
-        return view('admin.attendance_list');
-    })->name('admin.attendance_list');
+    Route::get('/admin/attendance_list/{ymd?}', [AdminAttendanceController::class, 'list'])->name('admin.attendance_list');
+
+    //管理者詳細
+    Route::get('admin.attendance_detail/{attendance}', [AdminAttendanceController::class, 'show'])->name('admin.attendance_detail');
+
+    //ログアウト
+    Route::post('/logout', [AdminLoginController::class, 'logout'])->name('logout');
 });
 
 //ログイン
