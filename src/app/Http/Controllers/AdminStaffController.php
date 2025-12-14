@@ -45,17 +45,17 @@ class AdminStaffController extends Controller
         $fileName = "{$user->name}_{$year}_{$month}_attendance.csv";
 
         return response()->streamDownload(function () use ($attendances, $csvService) {
-            $handle = fopen('php://output', 'w');
+            $handle = fopen('php://output', 'write');
 
             // ヘッダ-
             fputcsv($handle, array_map(
-                fn($v) => mb_convert_encoding($v, 'SJIS-win', 'UTF-8'),
+                fn($value) => mb_convert_encoding($value, 'SJIS-win', 'UTF-8'),
                 $csvService->headers()
             ));
 
             foreach ($attendances as $attendance) {
                 fputcsv($handle, array_map(
-                    fn($v) => mb_convert_encoding($v, 'SJIS-win', 'UTF-8'),
+                    fn($value) => mb_convert_encoding($value, 'SJIS-win', 'UTF-8'),
                     $csvService->row($attendance)
                 ));
             }
