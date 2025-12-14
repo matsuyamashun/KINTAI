@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminAttendanceController;
 use App\Http\Controllers\AdminLoginController;
+use App\Http\Controllers\AdminStaffController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BreakController;
@@ -78,6 +79,14 @@ Route::middleware(['auth:admin', 'admin'])->group(function () {
 
     //管理者詳細
     Route::get('admin.attendance_detail/{attendance}', [AdminAttendanceController::class, 'show'])->name('admin.attendance_detail');
+
+    //スタッフ一覧
+    Route::get('/admin.staff_list', [AdminStaffController::class, 'index'])->name('admin.staff_list');
+
+    //スタッフ別詳細
+    Route::get('admin.attendance_staff/{user}/{year?}/{month?}', [AdminStaffController::class, 'show'])->name('admin.attendance_staff');
+
+    Route::get('admin.attendance_staff/{user}//{year}/{month}/csv', [AdminStaffController::class, 'exportCsv'])->name('admin.attendance_csv');
 
     //ログアウト
     Route::post('/logout', [AdminLoginController::class, 'logout'])->name('logout');
