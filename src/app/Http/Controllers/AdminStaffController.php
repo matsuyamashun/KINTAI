@@ -39,12 +39,8 @@ class AdminStaffController extends Controller
     }
 
 
-    public function exportCsv(
-        User $user,
-        int $year,
-        int $month,
-        AttendanceCsvService $csvService
-    ) {
+    public function exportCsv(User $user, $year, $month, AttendanceCsvService $csvService)
+    {
         $attendances = $csvService->getMonthlyAttendances($user, $year, $month);
         $fileName = "{$user->name}_{$year}_{$month}_attendance.csv";
 
