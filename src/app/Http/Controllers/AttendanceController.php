@@ -3,10 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
+use App\Services\AttendanceService;
 use Carbon\Carbon;
 
 class AttendanceController extends Controller
 {
+    private AttendanceService $attendanceService;
+
+    public function __construct(AttendanceService $attendanceService)
+    {
+        $this->attendanceService = $attendanceService;
+    }
+
     public function index()
     {
         $attendance = Attendance::getTodayAttendance(auth()->id());
@@ -49,16 +57,7 @@ class AttendanceController extends Controller
         $prevDate = $date->copy()->subMonth();
         $nextDate = $date->copy()->addMonth();
 
-        $lastDay = $date->copy()->endOfMonth()->day;
-
-        $attendanceList = [];
-
-        for ($i = 1; $i <= $lastDay; $i++) {
-            $day = $date->copy()->day($i);
-
-            $attendanceList[$day->isoFormat('M/D(dd)')] =
-                Attendance::getAttendanceByDate(auth()->id(), $day);
-        }
+        $attendanceList = $this->attendanceService->getMonthlyAttendance(auth()->id(), $date);
 
         return view('list', compact('date', 'prevDate', 'nextDate', 'attendanceList'));
     }

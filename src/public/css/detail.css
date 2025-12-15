@@ -45,7 +45,7 @@
     font-size: 18px;
 }
 
-.detail__input { 
+.detail__input {
     position: relative;
     width: 160px;
     height: 33px;
@@ -84,7 +84,7 @@
 }
 
 .form__error {
-    color: red; 
+    color: red;
     font-size: 12px;
 }
 

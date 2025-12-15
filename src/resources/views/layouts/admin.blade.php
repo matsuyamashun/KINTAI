@@ -11,7 +11,7 @@
     @yield('css')
 </head>
 
-<body classs="attendance__body">
+<body class="attendance__body">
     <header class="header">
         <div class="header__inner">
             <div class="header-utilities">
@@ -21,8 +21,8 @@
             </div>
 
             <div class="header__nav">
-                <a class="header__nav__item" href="#">勤怠一覧</a>
-                <a class="header__nav__item" href="#">スタッフ一覧</a>
+                <a class="header__nav__item" href="{{ route('admin.attendance_list') }}">勤怠一覧</a>
+                <a class="header__nav__item" href="{{ route('admin.staff_list') }}">スタッフ一覧</a>
                 <a class="header__nav__item" href="#">申請一覧</a>
                 <form class="header__nav__item" action="{{ route('logout') }}" method="POST">
                     @csrf
