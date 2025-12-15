@@ -67,10 +67,10 @@ Route::middleware('auth')->group(function ()
     Route::get('/stamp_correction_request/list', [StampCorrectionRequestController::class, 'index'])->name('correction.list');
 
     //詳細編集
-    Route::get('attendance/detail/{attendance}', [AttendanceController::class, 'show'])->name('attendance.detail');
+    Route::get('/attendance/detail/{attendance}', [AttendanceController::class, 'show'])->name('attendance.detail');
 
     //保存処理
-    Route::patch('attendance/detail/{attendance}', [StampCorrectionRequestController::class,'store'])->name('correction.store');
+    Route::patch('/attendance/detail/{attendance}', [StampCorrectionRequestController::class,'store'])->name('correction.store');
 });
 
 //管理者のルート
@@ -78,15 +78,15 @@ Route::middleware(['auth:admin', 'admin'])->group(function () {
     Route::get('/admin/attendance_list/{ymd?}', [AdminAttendanceController::class, 'list'])->name('admin.attendance_list');
 
     //管理者詳細
-    Route::get('admin.attendance_detail/{attendance}', [AdminAttendanceController::class, 'show'])->name('admin.attendance_detail');
+    Route::get('/admin/attendance_detail/{attendance}', [AdminAttendanceController::class, 'show'])->name('admin.attendance_detail');
 
     //スタッフ一覧
     Route::get('/admin.staff_list', [AdminStaffController::class, 'index'])->name('admin.staff_list');
 
     //スタッフ別詳細
-    Route::get('admin.attendance_staff/{user}/{year?}/{month?}', [AdminStaffController::class, 'show'])->name('admin.attendance_staff');
+    Route::get('/admin/attendance_staff/{user}/{year?}/{month?}', [AdminStaffController::class, 'show'])->name('admin.attendance_staff');
 
-    Route::get('admin.attendance_staff/{user}//{year}/{month}/csv', [AdminStaffController::class, 'exportCsv'])->name('admin.attendance_csv');
+    Route::get('/admin/attendance_staff/{user}/{year}/{month}/csv', [AdminStaffController::class, 'exportCsv'])->name('admin.attendance_csv');
 
     //ログアウト
     Route::post('/logout', [AdminLoginController::class, 'logout'])->name('logout');

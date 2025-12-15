@@ -27,7 +27,7 @@
                'year' => $nextDate->year,
                'month' => $nextDate->month,
            ]) }}">
-            翌日 →
+            翌月 →
         </a>
     </div>
 
@@ -44,11 +44,10 @@
         </thead>
 
         <tbody>
-            @foreach($attendanceList as $daylabel => $attendance)
-
+            @foreach($attendanceList as $dayLabel => $attendance)
             <tr>
                 <td class="table__cell">
-                    {{ $daylabel }}
+                    {{ $dayLabel }}
                 </td>
 
                 <td class="table__cell">

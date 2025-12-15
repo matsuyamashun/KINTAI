@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Attendance;
 use App\Models\User;
 use App\Services\AttendanceCsvService;
+use App\Services\StampCorrectionRequestService;
 use Carbon\Carbon;
 
 class AdminStaffController extends Controller
@@ -24,16 +24,10 @@ class AdminStaffController extends Controller
         $prevDate = $date->copy()->subMonth();
         $nextDate = $date->copy()->addMonth();
 
-        $lastDay = $date->copy()->endOfMonth()->day;
+        $stampCorrection = app(StampCorrectionRequestService::class);
 
-        $attendanceList = [];
-
-        for ($i = 1; $i <= $lastDay; $i++) {
-            $day = $date->copy()->day($i);
-
-            $attendanceList[$day->isoFormat('M/D(dd)')] =
-                Attendance::getAttendanceByDate($user->id, $day);
-        }
+        $attendanceList = $stampCorrection
+            ->getMonthlyAttendance($user->id, $date);
 
         return view('admin.attendance_staff', compact('user', 'date', 'prevDate', 'nextDate', 'attendanceList'));
     }
