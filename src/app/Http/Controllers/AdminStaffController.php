@@ -31,8 +31,7 @@ class AdminStaffController extends Controller
         $prevDate = $date->copy()->subMonth();
         $nextDate = $date->copy()->addMonth();
 
-        $attendanceList = $this->attendanceService
-            ->getMonthlyAttendance($user->id, $date);
+        $attendanceList = $this->attendanceService->getMonthlyAttendance($user->id, $date);
 
         return view('admin.attendance_staff', compact('user', 'date', 'prevDate', 'nextDate', 'attendanceList'));
     }

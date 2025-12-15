@@ -57,8 +57,7 @@ class AttendanceController extends Controller
         $prevDate = $date->copy()->subMonth();
         $nextDate = $date->copy()->addMonth();
 
-        $attendanceList = $this->attendanceService
-            ->getMonthlyAttendance(auth()->id(), $date);
+        $attendanceList = $this->attendanceService->getMonthlyAttendance(auth()->id(), $date);
 
         return view('list', compact('date', 'prevDate', 'nextDate', 'attendanceList'));
     }
