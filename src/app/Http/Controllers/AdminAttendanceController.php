@@ -46,16 +46,10 @@ class AdminAttendanceController extends Controller
             //休憩時間更新
             if ($request->has('breaks')) {
                 foreach ($request->breaks as $break) {
-                    BreakTime::updateOrCreate(
-                        [
-                            'id' => $break['id'] ?? null,
-                        ],
-                        [
-                            'attendance_id' => $attendance->id,
-                            'start_time' => Carbon::createFromFormat('Y-m-d H:i', $attendance->date . ' ' . $break['start_time']),
-                            'end_time' => Carbon::createFromFormat('Y-m-d H:i', $attendance->date . ' ' . $break['end_time']),
-                        ]
-                    );
+                    BreakTime::with('id', $break['id'])->update([
+                        'start_time' => Carbon::createFromFormat('Y-m-d H:i', $attendance->date . ' ' . $break['start_time']),
+                        'end_time' => Carbon::createFromFormat('Y-m-d H:i', $attendance->date . ' ' . $break['end_time']),
+                    ]);
                 }
             }
         });
