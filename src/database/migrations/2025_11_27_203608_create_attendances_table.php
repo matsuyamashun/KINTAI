@@ -19,6 +19,7 @@ class CreateAttendancesTable extends Migration
             $table->date('date');
             $table->datetime('clock_in');
             $table->datetime('clock_out')->nullable();
+            $table->text('note')->nullable();
             $table->timestamps();
         });
     }

@@ -1,0 +1,92 @@
+.content {
+    width: 100%;
+    display: grid;
+}
+
+.content__title {
+    width: 80%;
+    margin: 50px auto;
+    border-left: 10px solid #000000;
+    padding: 5px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.attendance__detail {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.detail__item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 100%;
+    border-bottom: 2px solid #ddd;
+    padding: 15px;
+}
+
+.detail__item label {
+    color: #8a8a8a;
+}
+
+.detail__item > label {
+    width: 140px;
+}
+
+.detail__item div {
+    flex: 1;
+}
+
+.detail__item span {
+    margin: 0 12px;
+    font-size: 18px;
+}
+
+.detail__input {
+    position: relative;
+    width: 160px;
+    height: 33px;
+    text-align: center;
+    border: 1px solid #ddd;
+    margin-right: 40px;
+    cursor: pointer;
+
+    &::-webkit-calendar-picker-indicator {
+        position: absolute;
+        opacity: 0;
+    }
+}
+
+.detail__textarea {
+    width:  45%;
+    height: 70px;
+    border: 1px solid #ddd;
+    margin-right: 55px;
+    resize: vertical;
+    text-align: left;
+    display: block;
+    cursor: pointer;
+}
+.button__area {
+    width: 90%;
+    text-align: right;
+    margin-top: 20px;
+}
+
+.form__button {
+    background: #000000;
+    color: white;
+    border: none;
+    width: 15%;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.form__error {
+    color: red;
+    font-size: 12px;
+}

@@ -33,26 +33,34 @@ class DetailAttendanceRequest extends FormRequest
             $clockIn  = $this->clock_in;
             $clockOut = $this->clock_out;
 
+            if ($clockIn && $clockOut) {
+                if (strtotime($clockIn) >= strtotime($clockOut)) {
+                    $validator->errors()->add(
+                        'clock_out', '退勤時間が出勤より前です',
+                    );
+                }
+            }
+
             // 全ての休憩行をチェック
-            foreach ($this->breaks ?? [] as $i => $break) {
+            foreach ($this->breaks ?? [] as $index => $break) {
 
                 $start = $break['start_time'] ?? null;
                 $end   = $break['end_time']   ?? null;
 
                 if ($start && $clockIn && strtotime($start) < strtotime($clockIn)) {
-                    $validator->errors()->add("breaks.$i.start_time", '休憩開始時間が不適切な値です');
+                    $validator->errors()->add("breaks.$index.start_time", '休憩開始時間が不適切な値です');
                 }
 
                 if ($start && $clockOut && strtotime($start) >= strtotime($clockOut)) {
-                    $validator->errors()->add("breaks.$i.start_time", '休憩開始時間が不適切な値です');
+                    $validator->errors()->add("breaks.$index.start_time", '休憩開始時間が不適切な値です');
                 }
 
                 if ($end && $clockOut && strtotime($end) >= strtotime($clockOut)) {
-                    $validator->errors()->add("breaks.$i.end_time", '休憩終了時間が不適切な値です');
+                    $validator->errors()->add("breaks.$index.end_time", '休憩終了時間が不適切な値です');
                 }
 
                 if ($start && $end && strtotime($start) >= strtotime($end)) {
-                    $validator->errors()->add("breaks.$i.start_time", '休憩開始時間が不適切な値です');
+                    $validator->errors()->add("breaks.$index.start_time", '休憩開始時間が不適切な値です');
                 }
             }
         });

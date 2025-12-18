@@ -74,7 +74,7 @@
                        name="clock_out"
                        value="{{ $clockOut }}">
             </div>
-            
+
             @error('clock_in')
                 <div class="form__error">{{ $message }}</div>
             @enderror
@@ -83,28 +83,28 @@
                 <div class="form__error">{{ $message }}</div>
             @enderror
 
-            @foreach(($breaks ?? []) as $i => $break)
+            @foreach(($breaks ?? []) as $index => $break)
                 <div class="detail__item">
-                    <label>休憩 {{ $i + 1 }}</label>
+                    <label>休憩 {{ $index + 1 }}</label>
 
                     <input class="detail__input"
                            type="time"
-                           name="breaks[{{ $i }}][start_time]"
+                           name="breaks[{{ $index }}][start_time]"
                            value="{{ $break['start_time'] }}">
 
                     <span>&emsp;〜&emsp;</span>
 
                     <input class="detail__input"
                            type="time"
-                           name="breaks[{{ $i }}][end_time]"
+                           name="breaks[{{ $index }}][end_time]"
                            value="{{ $break['end_time'] }}">
                 </div>
 
-                 @error("breaks.$i.start_time")
+                 @error("breaks.$index.start_time")
                     <div class="form__error">{{ $message }}</div>
                 @enderror
 
-                @error("breaks.$i.end_time")
+                @error("breaks.$index.end_time")
                     <div class="form__error">{{ $message }}</div>
                 @enderror
             @endforeach

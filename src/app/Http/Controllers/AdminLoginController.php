@@ -27,7 +27,7 @@ class AdminLoginController extends Controller
 
         $user = Auth::guard('admin')->user();
 
-        if ($user->role !== User::ROLE_ADMIN) {
+        if (!$user->isAdmin()) {
             Auth::guard('admin')->logout();
             return back();
         }
