@@ -89,7 +89,6 @@ Route::middleware(['auth:admin', 'admin'])->group(function () {
     //スタッフ別詳細
     Route::get('/admin/attendance_staff/{user}/{year?}/{month?}', [AdminStaffController::class, 'show'])->name('admin.attendance_staff');
 
-
     //CSV
     Route::get('/admin/attendance_staff/{user}/{year}/{month}/csv', [AdminStaffController::class, 'exportCsv'])->name('admin.attendance_csv');
 

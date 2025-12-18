@@ -31,11 +31,11 @@ use Carbon\Carbon;
 
             <div class="detail__item">
                 <label>出勤・退勤</label>
-                <input class="detail__input" type="time" name="clock_in" value="{{ $attendance->clock_in ? \Carbon\Carbon::parse($attendance->clock_in)->format('H:i') : '' }}">
+                <input class="detail__input" type="time" name="clock_in" value="{{ $attendance->clock_in ? Carbon::parse($attendance->clock_in)->format('H:i') : '' }}">
 
                 <span>&emsp;〜&emsp;</span>
 
-                <input class="detail__input" type="time" name="clock_out" value="{{ $attendance->clock_out ? \Carbon\Carbon::parse($attendance->clock_out)->format('H:i') : '' }}">
+                <input class="detail__input" type="time" name="clock_out" value="{{ $attendance->clock_out ? Carbon::parse($attendance->clock_out)->format('H:i') : '' }}">
             </div>
 
             @error('clock_in')
@@ -53,11 +53,11 @@ use Carbon\Carbon;
                     <!-- 既存データですよを伝える -->
                     <input type="hidden" name="breaks[{{ $index }}][id]" value="{{ $break->id }}">
 
-                    <input class="detail__input" type="time" name="breaks[{{ $index }}][start_time]" value="{{ $break->start_time ? \Carbon\Carbon::parse($break->start_time)->format('H:i') : '' }}">
+                    <input class="detail__input" type="time" name="breaks[{{ $index }}][start_time]" value="{{ $break->start_time ? Carbon::parse($break->start_time)->format('H:i') : '' }}">
 
                     <span>&emsp;〜&emsp;</span>
 
-                    <input class="detail__input" type="time" name="breaks[{{ $index }}][end_time]" value="{{ $break->end_time ? \Carbon\Carbon::parse($break->end_time)->format('H:i') : '' }}">
+                    <input class="detail__input" type="time" name="breaks[{{ $index }}][end_time]" value="{{ $break->end_time ? Carbon::parse($break->end_time)->format('H:i') : '' }}">
                 </div>
 
                 @error("breaks.$index.start_time")
@@ -74,7 +74,7 @@ use Carbon\Carbon;
                 <textarea class="detail__textarea" name="note">{{ old('note', $pendingRequest->note ?? $attendance->note) }}</textarea>
 
                 @error('note')
-                <div class="form__error">{{ $message }}</div>
+                    <div class="form__error">{{ $message }}</div>
                 @enderror
             </div>
         </div>

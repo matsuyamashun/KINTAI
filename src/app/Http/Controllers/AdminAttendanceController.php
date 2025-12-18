@@ -33,9 +33,6 @@ class AdminAttendanceController extends Controller
         //全部成功で保存
         DB::transaction(function () use ($request, $attendance) {
 
-            $date = $attendance->date;
-
-
             //勤務時間更新
             $attendance->update([
                 'clock_in' => Carbon::createFromFormat('Y-m-d H:i', $attendance->date . ' ' . $request->clock_in),
@@ -46,7 +43,7 @@ class AdminAttendanceController extends Controller
             //休憩時間更新
             if ($request->has('breaks')) {
                 foreach ($request->breaks as $break) {
-                    BreakTime::with('id', $break['id'])->update([
+                    BreakTime::where('id', $break['id'])->update([
                         'start_time' => Carbon::createFromFormat('Y-m-d H:i', $attendance->date . ' ' . $break['start_time']),
                         'end_time' => Carbon::createFromFormat('Y-m-d H:i', $attendance->date . ' ' . $break['end_time']),
                     ]);
