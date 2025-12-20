@@ -64,6 +64,7 @@
                     承認
                 </button>
             </div>
+        </form>
     @endif
 </div>
 @endsection
