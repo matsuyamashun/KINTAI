@@ -2,7 +2,7 @@
     use Carbon\Carbon;
 @endphp
 
-@extends('includes.header')
+@extends('layouts.header')
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/list.css') }}" />
 @endsection

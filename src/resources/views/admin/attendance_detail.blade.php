@@ -13,7 +13,7 @@ use Carbon\Carbon;
         勤怠詳細
     </div>
 
-    <form action="{{ route('admin.attendance_detail', $attendance->id) }}" method="POST">
+    <form action="{{ route('admin.attendance_detail', $request->id) }}" method="POST">
         @csrf
         @method('PATCH')
 
@@ -26,7 +26,7 @@ use Carbon\Carbon;
 
             <div class="detail__item">
                 <label>日付</label>
-                <div>{{ Carbon::parse($attendance->date)->isoFormat('Y M月D日') }}</div>
+                <div>{{ Carbon::parse($attendance->date)->isoFormat('Y年M月D日') }}</div>
             </div>
 
             <div class="detail__item">

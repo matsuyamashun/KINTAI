@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminAttendanceController;
+use App\Http\Controllers\AdminAttendanceCorrctionController;
 use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\AdminStaffController;
 use App\Http\Controllers\AttendanceController;
@@ -92,8 +93,17 @@ Route::middleware(['auth:admin', 'admin'])->group(function () {
     //CSV
     Route::get('/admin/attendance_staff/{user}/{year}/{month}/csv', [AdminStaffController::class, 'exportCsv'])->name('admin.attendance_csv');
 
+    //申請
+    Route::get('/admin/stamp_correction_request/list', [AdminAttendanceCorrctionController::class, 'index'])->name('admin.correction_list');
+
+    //承認画面
+    Route::get('/admin/stamp_correction_request/detail/{request}', [AdminAttendanceCorrctionController::class, 'show'])->name('admin.correction_detail');
+
+    //承認更新
+    Route::patch('/admin/stamp_correction_request/detail/{request}/approve', [AdminAttendanceCorrctionController::class, 'approve'])->name('admin.correction_approve');
+
     //ログアウト
-    Route::post('/logout', [AdminLoginController::class, 'logout'])->name('logout');
+    Route::post('/admin/logout', [AdminLoginController::class, 'logout'])->name('admin.logout');
 });
 
 //ログイン

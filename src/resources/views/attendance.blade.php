@@ -2,7 +2,7 @@
     use App\Models\Attendance;
 @endphp
 
-@extends('includes.header')
+@extends('layouts.header')
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/attendance.css') }}" />
 @endsection

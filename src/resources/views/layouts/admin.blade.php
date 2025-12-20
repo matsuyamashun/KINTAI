@@ -23,8 +23,8 @@
             <div class="header__nav">
                 <a class="header__nav__item" href="{{ route('admin.attendance_list') }}">勤怠一覧</a>
                 <a class="header__nav__item" href="{{ route('admin.staff_list') }}">スタッフ一覧</a>
-                <a class="header__nav__item" href="#">申請一覧</a>
-                <form class="header__nav__item" action="{{ route('logout') }}" method="POST">
+                <a class="header__nav__item" href="{{ route('admin.correction_list') }}">申請一覧</a>
+                <form class="header__nav__item" action="{{ route('admin.logout') }}" method="POST">
                     @csrf
                     <button type="submit" class="form__button">ログアウト</button>
                 </form>

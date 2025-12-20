@@ -1,0 +1,72 @@
+.content {
+    width: 100%;
+}
+
+.content__title {
+    width: 80%;
+    margin: 50px auto;
+    border-left: 10px solid #000000;
+    padding: 5px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.attendance__detail {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.detail__item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 100%;
+    border-bottom: 2px solid #ddd;
+    padding: 15px;
+}
+
+.detail__item label {
+    color: #8a8a8a;
+}
+
+.detail__item>label {
+    width: 150px;
+}
+
+.detail__item div {
+    flex: 1;
+}
+
+.detail__item span {
+    margin: 0 15px;
+    font-size: 18px;
+    width: 30%;
+}
+
+.button__area {
+    width: 90%;
+    text-align: right;
+    margin-top: 20px;
+}
+
+.correction__button {
+    background: #000000;
+    color: white;
+    border: none;
+    width: 15%;
+    padding: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.approved__button {
+    background: #737373;
+    color: white;
+    border: none;
+    width: 15%;
+    padding: 5px;
+    border-radius: 3px;
+}
