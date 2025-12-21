@@ -3,7 +3,7 @@
     use App\Models\StampCorrectionRequest;
 @endphp
 
-@extends('includes.header')
+@extends('layouts.header')
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/correction_list.css') }}" />
 @endsection
