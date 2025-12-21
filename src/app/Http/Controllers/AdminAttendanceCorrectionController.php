@@ -7,7 +7,7 @@ use App\Services\StampCorrectionRequestService;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
-class AdminAttendanceCorrctionController extends Controller
+class AdminAttendanceCorrectionController extends Controller
 {
     protected $stampCorrectionRequestService;
 

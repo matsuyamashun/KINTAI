@@ -1,4 +1,5 @@
 @php
+    use App\Models\StampCorrectionRequest;
     use Carbon\Carbon;
 @endphp
 
@@ -49,7 +50,7 @@
         </div>
     </div>
 
-    @if ($request->status === 'approved')
+    @if ($request->status === StampCorrectionRequest::STATUS_APPROVED)
         <div class="button__area">
             <button class="approved__button">
                 承認済み

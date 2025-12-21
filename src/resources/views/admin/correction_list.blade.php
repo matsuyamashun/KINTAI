@@ -15,8 +15,8 @@ use App\Models\StampCorrectionRequest;
     </div>
 
     <div class="tabs">
-        <a class="tab__pending" href="{{ route('admin.correction_list', ['tab' => 'pending']) }}">承認待ち</a>
-        <a class="tsb__approved" href="{{ route('admin.correction_list', ['tab' => 'approved']) }}">承認済み</a>
+        <a class="tab__pending" href="{{ route('admin.correction_list', ['tab' => StampCorrectionRequest::STATUS_PENDING]) }}">承認待ち</a>
+        <a class="tsb__approved" href="{{ route('admin.correction_list', ['tab' => StampCorrectionRequest::STATUS_APPROVED]) }}">承認済み</a>
     </div>
 
     <table class="attendance__table">

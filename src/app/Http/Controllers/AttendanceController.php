@@ -69,29 +69,30 @@ class AttendanceController extends Controller
         // 承認待ち申請がある
         $isLocked = isset($pendingRequest);
 
+        $breaks= [];
+
         // 出勤・退勤の表示値
-        $clockIn = $isLocked
-            ? Carbon::parse($pendingRequest->new_clock_in)->format('H:i')
-            : Carbon::parse($attendance->clock_in)->format('H:i');
-
-        $clockOut = $isLocked && $pendingRequest->new_clock_out
-            ? Carbon::parse($pendingRequest->new_clock_out)->format('H:i')
-            : ($attendance->clock_out ? Carbon::parse($attendance->clock_out)->format('H:i') : '');
-
         if ($isLocked) {
+            // 承認待ち申請がある場合
+            $clockIn = Carbon::parse($pendingRequest->new_clock_in)->format('H:i');
+
+            $clockOut = $pendingRequest->new_clock_out ? Carbon::parse($pendingRequest->new_clock_out)->format('H:i')  : '';
+
             $breaks = $pendingRequest->new_breaks ?? [];
         } else {
+            // 通常の勤怠表示
+            $clockIn = Carbon::parse($attendance->clock_in)->format('H:i');
+
+            $clockOut = $attendance->clock_out ? Carbon::parse($attendance->clock_out)->format('H:i') : '';
+
             $breaks = $attendance->breaks->map(fn($b) => [
                 'start_time' => $b->start_time ? Carbon::parse($b->start_time)->format('H:i') : '',
-                'end_time' => $b->start_time ? Carbon::parse($b->end_time)->format('H:i') : '',
+                'end_time' => $b->end_time ? Carbon::parse($b->end_time)->format('H:i') : '',
             ])->toArray();
         }
 
-        if (!is_array($breaks)) {
-            $breaks = [];
-        }
-
-        if (count($breaks) === 0) {
+        // 休憩が0件の場合は1枠表示（$breaksを使用）
+        if (empty($breaks)) {
             $breaks[] = ['start_time' => '', 'end_time' => ''];
         }
 
