@@ -20,7 +20,7 @@ class AdminLoginController extends Controller
 
         //ログイン失敗
         if (!Auth::guard('admin')->attempt($credentials)) {
-            return back()->withErros([
+            return back()->withErrors([
                 'email' => 'ログイン情報が登録されてません',
             ]);
         }

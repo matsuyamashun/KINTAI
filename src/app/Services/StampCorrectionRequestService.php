@@ -10,13 +10,6 @@ class StampCorrectionRequestService
     //申請作成
     public function create(Attendance $attendance, $request)
     {
-        $oldBreaks = $attendance->breaks->map(function ($break) {
-            return [
-                'start_time' => $break->start_time,
-                'end_time' => $break->end_time,
-            ];
-        });
-
         $newBreaks = [];
         if($request->breaks) {
             foreach($request->breaks as $break) {
