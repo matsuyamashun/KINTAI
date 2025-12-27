@@ -7,7 +7,7 @@ use Tests\TestCase;
 
 class AdminLoginTest extends TestCase
 {
-    use  RefreshDatabase;
+    use RefreshDatabase;
 
     public function test_メールアドレスが未入力の場合、バリデーションメッセージが表示()
     {

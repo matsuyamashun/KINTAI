@@ -36,7 +36,7 @@ class DetailAttendanceRequest extends FormRequest
             if ($clockIn && $clockOut) {
                 if (strtotime($clockIn) >= strtotime($clockOut)) {
                     $validator->errors()->add(
-                        'clock_out', '退勤時間が出勤より前です',
+                        'clock_in', '出勤時刻が不適切な値です',
                     );
                 }
             }
@@ -71,7 +71,7 @@ class DetailAttendanceRequest extends FormRequest
         return [
             'clock_in.required'    => '出勤時間が不適切な値です',
             'clock_in.date_format' => '出勤時間が不適切な値です',
-            
+
             'clock_out.date_format' => '退勤時間が不適切な値です',
 
             'breaks.*.start_time.date_format' => '休憩開始時間が不適切な値です',

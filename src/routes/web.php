@@ -85,7 +85,7 @@ Route::middleware(['auth:admin', 'admin'])->group(function () {
     Route::patch('/admin/attendance_detail/{attendance}', [AdminAttendanceController::class, 'update'])->name('admin.attendance_detail');
 
     //スタッフ一覧
-    Route::get('/admin.staff_list', [AdminStaffController::class, 'index'])->name('admin.staff_list');
+    Route::get('/admin/staff_list', [AdminStaffController::class, 'index'])->name('admin.staff_list');
 
     //スタッフ別詳細
     Route::get('/admin/attendance_staff/{user}/{year?}/{month?}', [AdminStaffController::class, 'show'])->name('admin.attendance_staff');
