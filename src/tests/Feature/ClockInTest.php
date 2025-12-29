@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -41,6 +42,8 @@ class ClockInTest extends TestCase
 
     public function test_出勤時刻が勤怠一覧で確認できる()
     {
+        Carbon::setTestNow('2025-12-25 10:00:00');
+
         $user = User::factory()->create();
         $this->actingAs($user);
 
@@ -49,6 +52,6 @@ class ClockInTest extends TestCase
 
         $response = $this->get('/attendance/list');
 
-        $response->assertSee(now()->format('H:i'));
+        $response->assertSee('10:00');
     }
 }
