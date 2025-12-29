@@ -57,15 +57,15 @@ php artisan db:seed
 
 ～一般ユーザー～
 
-メールアドレス　user@example.com
+メールアドレス　user100@example.com
 
-パスワード　password111
+パスワード　password100
 
 ～管理者～
 
-メールアドレス　admin123@example.com
+メールアドレス　admin111@example.com
 
-パスワード　password123
+パスワード　password111
 
 <h2>使用技術</h2>
 
