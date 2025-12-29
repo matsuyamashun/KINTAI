@@ -53,6 +53,28 @@ php artisan migrate
 
 php artisan db:seed
 
+<h2>ログイン情報</h2>
+
+～一般ユーザー～
+
+メールアドレス　user@example.com
+
+パスワード　password111
+
+～管理者～
+
+メールアドレス　admin123@example.com
+
+パスワード　password123
+
+<h2>使用技術</h2>
+
+・PHP8.1.33
+
+・Laravel 8.83.8
+
+・MySQL8.0.44
+
 <h2>ER図</h2>
 
 ```mermaid
