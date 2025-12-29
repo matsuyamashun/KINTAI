@@ -146,4 +146,4 @@ erDiagram
 
 <h2>テスト</h2>
 
-.PHPUnitを使用したFeatureテスト実装、動作確認済み
+.PHPUnitを使用したFeatureテスト実装
