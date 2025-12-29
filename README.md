@@ -49,7 +49,7 @@ php artisan key:generate
 
 php artisan migrate
 
-7.シーティングの実行
+7.シーディングの実行
 
 php artisan db:seed
 
@@ -143,3 +143,7 @@ erDiagram
 ．　メール認証::http://localhost:8025/
 
 ． phpMyAdmin::http://localhost:8080/
+
+<h2>テスト</h2>
+
+.PHPUnitを使用したFeatureテスト実装、動作確認済み
