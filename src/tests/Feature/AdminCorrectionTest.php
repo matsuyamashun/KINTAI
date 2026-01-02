@@ -54,14 +54,14 @@ class AdminCorrectionTest extends TestCase
         $request = StampCorrectionRequest::factory()->create([
             'new_clock_in' => '10:00',
             'new_clock_out' => '20:00',
-            'note' => '修正しまっす',
+            'note' => '修正します',
         ]);
 
         $response = $this->actingAs($admin, 'admin')->get("/admin/stamp_correction_request/detail/{$request->id}");
 
         $response->assertSee('10:00');
         $response->assertSee('20:00');
-        $response->assertSee('修正しまっす');
+        $response->assertSee('修正します');
     }
 
     public function test_修正申請の承認処理が正しく行われる()
@@ -84,9 +84,9 @@ class AdminCorrectionTest extends TestCase
             'user_id' => $user->id,
             'new_clock_in' => '10:00',
             'new_clock_out' => '20:00',
-            'note' => '修正しまっす',
+            'note' => '修正します',
             'status' => 'pending',
-            'new_breaks' => [],//ここ大事
+            'new_breaks' => [],
         ]);
 
         //承認する
@@ -106,7 +106,7 @@ class AdminCorrectionTest extends TestCase
             'id' => $attendance->id,
             'clock_in' => '2025-12-25 10:00:00',
             'clock_out' => '2025-12-25 20:00:00',
-            'note' => '修正しまっす',
+            'note' => '修正します',
         ]);
     }
 }

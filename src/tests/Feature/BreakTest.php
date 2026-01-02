@@ -61,7 +61,6 @@ class BreakTest extends TestCase
         $user = User::factory()->create();
         $this->actingAs($user);
 
-
         $this->post('/attendance/start');
         $this->post('/break/start');
         $this->post('/break/end');
@@ -76,7 +75,6 @@ class BreakTest extends TestCase
     {
         $user = User::factory()->create();
         $this->actingAs($user);
-
 
         $this->post('/attendance/start');
         $this->post('/break/start');

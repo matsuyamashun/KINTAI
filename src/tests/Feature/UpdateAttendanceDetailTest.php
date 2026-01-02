@@ -19,12 +19,7 @@ class UpdateAttendanceDatailTest extends TestCase
 
         $date = '2025-12-25';
         //ユーザー情報
-        $attendance = Attendance::factory()->create([
-            'user_id' => $user->id,
-            'date' => $date,
-            'clock_in' => $date . ' 09:00:00',
-            'clock_out' => $date . ' 18:00:00',
-        ]);
+        $attendance = $this->createAttendanceData($user, $date);
 
         $response = $this->actingAs($user)->patch("/attendance/detail/{$attendance->id}",[
             'clock_in' => '19:00',
@@ -43,18 +38,7 @@ class UpdateAttendanceDatailTest extends TestCase
 
         $date = '2025-12-25';
         //ユーザー情報
-        $attendance = Attendance::factory()->create([
-            'user_id' => $user->id,
-            'date' => $date,
-            'clock_in' => $date . ' 09:00:00',
-            'clock_out' => $date . ' 18:00:00',
-        ]);
-
-        BreakTime::factory()->create([
-            'attendance_id' => $attendance->id,
-            'start_time' => $date . ' 12:00:00',
-            'end_time' => $date . ' 13:00:00',
-        ]);
+        $attendance = $this->createAttendanceData($user, $date);
 
         $response = $this->actingAs($user)->patch("/attendance/detail/{$attendance->id}",
             [
@@ -82,18 +66,7 @@ class UpdateAttendanceDatailTest extends TestCase
 
         $date = '2025-12-25';
         //ユーザー情報
-        $attendance = Attendance::factory()->create([
-            'user_id' => $user->id,
-            'date' => $date,
-            'clock_in' => $date . ' 09:00:00',
-            'clock_out' => $date . ' 18:00:00',
-        ]);
-
-        BreakTime::factory()->create([
-            'attendance_id' => $attendance->id,
-            'start_time' => $date . ' 12:00:00',
-            'end_time' => $date . ' 13:00:00',
-        ]);
+        $attendance = $this->createAttendanceData($user, $date);
 
         $response = $this->actingAs($user)->patch("/attendance/detail/{$attendance->id}",
             [
@@ -121,18 +94,7 @@ class UpdateAttendanceDatailTest extends TestCase
 
         $date = '2025-12-25';
         //ユーザー情報
-        $attendance = Attendance::factory()->create([
-            'user_id' => $user->id,
-            'date' => $date,
-            'clock_in' => $date . ' 09:00:00',
-            'clock_out' => $date . ' 18:00:00',
-        ]);
-
-        BreakTime::factory()->create([
-            'attendance_id' => $attendance->id,
-            'start_time' => $date . ' 12:00:00',
-            'end_time' => $date . ' 13:00:00',
-        ]);
+        $attendance = $this->createAttendanceData($user, $date);
 
         $response = $this->actingAs($user)->patch("/attendance/detail/{$attendance->id}",
             [
@@ -164,12 +126,7 @@ class UpdateAttendanceDatailTest extends TestCase
         //データ修正
         $date = '2025-12-25';
 
-        $attendance = Attendance::factory()->create([
-            'user_id' => $user->id,
-            'date' => $date,
-            'clock_in' => $date . ' 09:00:00',
-            'clock_out' => $date . ' 18:00:00',
-        ]);
+        $attendance = $this->createAttendanceData($user, $date);
 
         $this->actingAs($user)->patch("/attendance/detail/{$attendance->id}",
             [
@@ -214,12 +171,7 @@ class UpdateAttendanceDatailTest extends TestCase
         //データ修正
         $date = '2025-12-25';
 
-        $attendance = Attendance::factory()->create([
-            'user_id' => $user->id,
-            'date' => $date,
-            'clock_in' => $date . ' 09:00:00',
-            'clock_out' => $date . ' 18:00:00',
-        ]);
+        $attendance = $this->createAttendanceData($user, $date);
 
         //修正申請
         $this->actingAs($user)->patch(
@@ -259,12 +211,7 @@ class UpdateAttendanceDatailTest extends TestCase
         //データ修正
         $date = '2025-12-25';
 
-        $attendance = Attendance::factory()->create([
-            'user_id' => $user->id,
-            'date' => $date,
-            'clock_in' => $date . ' 09:00:00',
-            'clock_out' => $date . ' 18:00:00',
-        ]);
+        $attendance = $this->createAttendanceData($user, $date);
 
         //修正申請
         $this->actingAs($user)->patch(
@@ -303,12 +250,7 @@ class UpdateAttendanceDatailTest extends TestCase
         //データ修正
         $date = '2025-12-25';
 
-        $attendance = Attendance::factory()->create([
-            'user_id' => $user->id,
-            'date' => $date,
-            'clock_in' => $date . ' 09:00:00',
-            'clock_out' => $date . ' 18:00:00',
-        ]);
+        $attendance = $this->createAttendanceData($user, $date);
 
         //修正申請
         $this->actingAs($user)->patch(
@@ -338,5 +280,23 @@ class UpdateAttendanceDatailTest extends TestCase
         $response = $this->actingAs($admin, 'admin')->get("/admin/attendance_detail/{$attendance->id}");
 
         $response->assertStatus(200);
+    }
+
+    private function createAttendanceData($user, $date)
+    {
+        $attendance = Attendance::factory()->create([
+            'user_id' => $user->id,
+            'date' => $date,
+            'clock_in' => $date . ' 09:00:00',
+            'clock_out' => $date . ' 18:00:00',
+        ]);
+
+        BreakTime::factory()->create([
+            'attendance_id' => $attendance->id,
+            'start_time' => $date . ' 12:00:00',
+            'end_time' => $date . ' 13:00:00',
+        ]);
+
+        return $attendance;
     }
 }

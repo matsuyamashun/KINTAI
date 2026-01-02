@@ -4,17 +4,19 @@ namespace Tests\Feature;
 
 use App\Models\Attendance;
 use App\models\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class AdminStaffListTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_管理者ユーザーが全一般ユーザーの「氏名」「メールアドレス」を確認できる()
     {
         //複数人作る（人）
         $users = User::factory()->count(5)->create();
         $admin = User::factory()->create();
-
 
         $response = $this->actingAs($admin, 'admin')->get('/admin/staff_list');
 
@@ -29,7 +31,7 @@ class AdminStaffListTest extends TestCase
         $user = User::factory()->create();
         $admin = User::factory()->create();
 
-        $date = '2025-12-25';
+        $date = Carbon::now()->format('Y-m-d');
 
         Attendance::factory()->create([
             'user_id' => $user->id,

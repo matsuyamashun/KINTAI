@@ -20,12 +20,7 @@ class AdminDatailTest extends TestCase
         $date = '2025-12-25';
 
         //勤怠データ
-        $attendance = Attendance::factory()->create([
-            'user_id' => $user->id,
-            'date' => $date,
-            'clock_in' => $date . ' 09:00:00',
-            'clock_out' => $date . ' 18:00:00',
-        ]);
+        $attendance = $this->createAttendanceData($user, $date);
 
         $response = $this->actingAs($admin, 'admin')->get("/admin/attendance_detail/{$attendance->id}");
 
@@ -43,12 +38,7 @@ class AdminDatailTest extends TestCase
         $date = '2025-12-25';
 
         //勤怠データ
-        $attendance = Attendance::factory()->create([
-            'user_id' => $user->id,
-            'date' => $date,
-            'clock_in' => $date . ' 09:00:00',
-            'clock_out' => $date . ' 18:00:00',
-        ]);
+        $attendance = $this->createAttendanceData($user, $date);
 
         $response = $this->actingAs($admin, 'admin')->patch("/admin/attendance_detail/{$attendance->id}", [
             'clock_in' => '19:00',
@@ -68,18 +58,7 @@ class AdminDatailTest extends TestCase
 
         $date = '2025-12-25';
 
-        $attendance = Attendance::factory()->create([
-            'user_id' => $user->id,
-            'date' => $date,
-            'clock_in' => $date . ' 09:00:00',
-            'clock_out' => $date . ' 18:00:00',
-        ]);
-
-        BreakTime::factory()->create([
-            'attendance_id' => $attendance->id,
-            'start_time' => $date . ' 12:00:00',
-            'end_time' => $date . ' 13:00:00',
-        ]);
+        $attendance = $this->createAttendanceData($user, $date);
 
         $response = $this->actingAs($admin, 'admin')->patch("/admin/attendance_detail/{$attendance->id}",
             [
@@ -107,18 +86,7 @@ class AdminDatailTest extends TestCase
 
         $date = '2025-12-25';
 
-        $attendance = Attendance::factory()->create([
-            'user_id' => $user->id,
-            'date' => $date,
-            'clock_in' => $date . ' 09:00:00',
-            'clock_out' => $date . ' 18:00:00',
-        ]);
-
-        BreakTime::factory()->create([
-            'attendance_id' => $attendance->id,
-            'start_time' => $date . ' 12:00:00',
-            'end_time' => $date . ' 13:00:00',
-        ]);
+        $attendance = $this->createAttendanceData($user, $date);
 
         $response = $this->actingAs($admin, 'admin')->patch("/admin/attendance_detail/{$attendance->id}",
             [
@@ -147,18 +115,7 @@ class AdminDatailTest extends TestCase
 
         $date = '2025-12-25';
         //ユーザー情報
-        $attendance = Attendance::factory()->create([
-            'user_id' => $user->id,
-            'date' => $date,
-            'clock_in' => $date . ' 09:00:00',
-            'clock_out' => $date . ' 18:00:00',
-        ]);
-
-        BreakTime::factory()->create([
-            'attendance_id' => $attendance->id,
-            'start_time' => $date . ' 12:00:00',
-            'end_time' => $date . ' 13:00:00',
-        ]);
+        $attendance = $this->createAttendanceData($user, $date);
 
         $response = $this->actingAs($admin, 'admin')->patch("/admin/attendance_detail/{$attendance->id}",
             [
@@ -177,5 +134,23 @@ class AdminDatailTest extends TestCase
         $response->assertSessionHasErrors([
             'note' => '備考を記入してください',
         ]);
+    }
+
+    private function createAttendanceData($user, $date)
+    {
+        $attendance = Attendance::factory()->create([
+            'user_id' => $user->id,
+            'date' => $date,
+            'clock_in' => $date . ' 09:00:00',
+            'clock_out' => $date . ' 18:00:00',
+        ]);
+
+        BreakTime::factory()->create([
+            'attendance_id' => $attendance->id,
+            'start_time' => $date . ' 12:00:00',
+            'end_time' => $date . ' 13:00:00',
+        ]);
+
+        return $attendance;
     }
 }

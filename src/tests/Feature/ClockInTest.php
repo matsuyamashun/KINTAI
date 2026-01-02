@@ -16,7 +16,6 @@ class ClockInTest extends TestCase
         $user = User::factory()->create();
         $this->actingAs($user);
 
-        //1回状態作る
         $this->post('/attendance/start');
 
         $response = $this->get('/attendance');

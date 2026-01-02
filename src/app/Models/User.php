@@ -41,13 +41,13 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function isAdmin()
-    {
-        return $this->role === self::ROLE_ADMIN;
-    }
-
     public function attendances()
     {
         return $this->hasMany(Attendance::class);
+    }
+
+    public function isAdmin()
+    {
+        return $this->role === self::ROLE_ADMIN;
     }
 }
