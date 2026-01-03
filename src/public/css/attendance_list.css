@@ -1,0 +1,64 @@
+.content {
+    width: 100%;
+    display: grid;
+}
+
+.content__title {
+    width: 80%;
+    margin: 50px auto;
+    border-left: 10px solid #000000;
+    padding: 5px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.day__nav {
+    width: 80%;
+    margin: 0px auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.nav__button {
+    text-decoration: none;
+    color: #858585;
+}
+
+.span__item,
+.current__month {
+    font-weight: bold;
+}
+
+.attendance__table {
+    width: 80%;
+    margin: 40px auto;
+    background-color: white;
+    border-radius: 5px;
+    color: #858585;
+}
+
+.attendance__table th {
+    border-bottom: 2px solid #8d8d8d;
+    padding: 5px;
+}
+
+.attendance__table td {
+    border-bottom: 2px solid #ddd;
+}
+
+.table__cell {
+    width: 120px;
+    text-align: center;
+    white-space: nowrap;
+    padding: 5px;
+}
+
+.table__cell a {
+    font-weight: bold;
+    text-decoration: none;
+    color: #000000;
+}

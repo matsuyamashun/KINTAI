@@ -1,0 +1,31 @@
+.content {
+    width: 100%;
+}
+
+.content__email {
+    text-align: center;
+    margin: 100px auto;
+}
+
+.content__email p {
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.email__link {
+    text-decoration: none;
+    font-weight: bold;
+    color: #000;
+    border: 1px solid #000000;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #ddd;
+    cursor: pointer;
+}
+
+.email__button {
+    border: none;
+    background-color: #ffffff;
+    margin-top: 30px;
+    color: rgb(0, 174, 249);
+}
