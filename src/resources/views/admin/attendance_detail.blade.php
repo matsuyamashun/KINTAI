@@ -13,7 +13,7 @@ use Carbon\Carbon;
         勤怠詳細
     </div>
 
-    <form action="{{ route('admin.attendance_detail', $request->id) }}" method="POST">
+    <form action="{{ route('admin.attendance_detail', $attendance->id) }}" method="POST">
         @csrf
         @method('PATCH')
 

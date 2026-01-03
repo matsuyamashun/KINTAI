@@ -61,6 +61,6 @@ class AdminAttendanceCorrectionController extends Controller
                 'status' => 'approved',
             ]);
         });
-        return redirect()->route('admin.correction_list', ['tab' => 'approve']);
+        return redirect()->route('admin.correction_list', ['tab' => 'approved']);
     }
 }
